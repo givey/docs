@@ -1,0 +1,84 @@
+name: Fundraisers
+endpoints:
+  - index:
+    path: /fundraisers
+    header: List all fundraisers
+    description: Retrieves a list of all fundraisers on Givey
+    example_request: >-
+      $ curl https://api.givey.com/v4/fundraisers \
+        -H "Authorization: Bearer {access token}"
+    example_response: >-
+      {
+        "data": [
+          {
+            "id": 1,
+            "type": "fundraisers",
+            "attributes": {
+              "givey-tag": "fundraiser-one",
+              "name": "Fundraiser one",
+              "description": "Description for Fundraiser one",
+              "avatars": {
+                "tiny": "url_to_avatar",
+                "small": "url_to_avatar",
+                "medium": "url_to_avatar",
+                "large": "url_to_avatar"
+              },
+              "hero-images": {
+                "small": "url_to_avatar",
+                "profile": "url_to_avatar",
+                "dark": "url_to_avatar"
+              },
+              "twitter-url": "https://twitter.com/fundraiserone",
+              "facebook-url": "https://facebook.com/fundraiser-one",
+              "profile-url": "https://givey.com/fundraiser-one",
+              "target": 10000,
+              "raised": 10000,
+              "percentage-raised": 100,
+              "created-at": "2018-07-17T09:26:52.688Z",
+              "ending-at": "2018-07-17T09:26:52.688Z"
+            }
+          }
+        ]
+      }
+  - show:
+    path: /fundraisers/{id}
+    header: List a specific fundraiser
+    description: Retrieves a specific fundraiser based on passed arguments
+    example_request: >-
+      $ curl https://api.givey.com/v4/fundraisers/1 \
+        -H "Authorization: Bearer {access token}"
+    example_response: >-
+      {
+        "data": {
+          "id": 1,
+          "type": "fundraisers",
+          "attributes": {
+            "givey-tag": "fundraiser-one",
+            "name": "Fundraiser one",
+            "description": "Description for Fundraiser one",
+            "avatars": {
+              "tiny": "url_to_avatar",
+              "small": "url_to_avatar",
+              "medium": "url_to_avatar",
+              "large": "url_to_avatar"
+            },
+            "hero-images": {
+              "small": "url_to_avatar",
+              "profile": "url_to_avatar",
+              "dark": "url_to_avatar"
+            },
+            "twitter-url": "https://twitter.com/fundraiserone",
+            "facebook-url": "https://facebook.com/fundraiser-one",
+            "profile-url": "https://givey.com/fundraiser-one",
+            "target": 10000,
+            "raised": 10000,
+            "percentage-raised": 100,
+            "created-at": "2018-07-17T09:26:52.688Z",
+            "ending-at": "2018-07-17T09:26:52.688Z"
+          }
+        }
+      }
+    args:
+      - name: Id
+        description: The Id or username of the fundraiser
+        type: string

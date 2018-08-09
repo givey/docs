@@ -1,10 +1,10 @@
 ---
-title: Charities
-order: 3
+title: Fundraisers
+order: 4
 ---
 
 <div class="text-left">
-{% assign model = site.data.api.charities %}
+{% assign model = site.data.api.fundraisers %}
 {% for endpoint in model.endpoints %}
   <div class="endpoint">
     <div class="descriptions">
