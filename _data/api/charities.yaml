@@ -1,0 +1,82 @@
+name: Charities
+endpoints:
+  - index:
+    path: /charities
+    header: List all charities
+    description: Retrieves a list of all charities on Givey
+    example_request: /charities
+    example_response: >-
+      {
+        "data": [
+          {
+            "id": 1,
+            "type": "charities",
+            "attributes": {
+              "givey-tag": "charity-one",
+              "name": "Charity one",
+              "description": "Description for Charity one",
+              "avatars": {
+                "tiny": "url_to_avatar",
+                "small": "url_to_avatar",
+                "medium": "url_to_avatar",
+                "large": "url_to_avatar"
+              },
+              "hero-images": {
+                "small": "url_to_avatar",
+                "profile": "url_to_avatar",
+                "dark": "url_to_avatar"
+              },
+              "website-url": "https://givey.com/charity-one",
+              "twitter-url": "https://twitter.com/charityone",
+              "donations-count": 542,
+              "following-count": 12,
+              "followers-count": 16,
+              "raised": 234300,
+              "billing-enabled?": true,
+              "created-at": "2018-07-17T09:26:52.688Z"
+            }
+          }
+        ]
+      }
+  - show:
+    path: /charities/{id}
+    header: List a specific charity
+    description: Retrieves a specific charity based on passed arguments
+    example_request: /charities/1
+    example_response: >-
+      {
+        "data": [
+          {
+            "id": 1,
+            "type": "charities",
+            "attributes": {
+              "givey-tag": "charity-one",
+              "name": "Charity one",
+              "description": "Description for Charity one",
+              "avatars": {
+                "tiny": "url_to_avatar",
+                "small": "url_to_avatar",
+                "medium": "url_to_avatar",
+                "large": "url_to_avatar"
+              },
+              "hero-images": {
+                "small": "url_to_avatar",
+                "profile": "url_to_avatar",
+                "dark": "url_to_avatar"
+              },
+              "website-url": "https://givey.com/charity-one",
+              "twitter-url": "https://twitter.com/charityone",
+              "donations-count": 542,
+              "following-count": 12,
+              "followers-count": 16,
+              "raised": 234300,
+              "billing-enabled?": true,
+              "created-at": "2018-07-17T09:26:52.688Z"
+            }
+          }
+        ]
+      }
+    args:
+      - name: Id
+        description: The Id or username of the charity
+        type: string
