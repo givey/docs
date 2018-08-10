@@ -1,0 +1,101 @@
+name: Donations
+object_example: >-
+  {
+    "id": 1,
+    "type": "donations",
+    "attributes": {
+      "activity-id": "MK1234HFWEI",
+      "amount": 1000,
+      "comments-count": 12,
+      "content-text": "Well done",
+      "matched-total": 500,
+      "processed": true,
+      "status": "complete",
+      "created-at": "2018-07-17T09:26:52.688Z",
+      "is-anonymous": true,
+    }
+  }
+attributes:
+  - name: Id
+    type: string
+    description: The unique identifier of the Donation
+  - name: activity-id
+    type: string
+    description: A unique identifier used on Givey
+  - name: amount
+    type: integer
+    description: The amount the donation was for (in pence)
+  - name: comments-count
+    type: integer
+    description: The amount of comments on this donation
+  - name: content-text
+    type: string
+    description: The message that was left with this donation
+  - name: matched-total
+    type: integer
+    description: The amount that was matched by the business (in pence)
+  - name: processed
+    type: boolean
+    description: Whether or not the donation has been processed by our payment provider
+  - name: status
+    type: string
+    description: The donation status. Can be one of failed, pending or complete
+  - name: created-at
+    type: datetime
+    description: The date the Fundraiser was created
+  - name: is-anonymous
+    type: boolean
+    description: Whether or not the donation was made anonymously
+endpoints:
+  - index:
+    id: index
+    path: /donations
+    header: List all donations
+    description: Retrieves a list of all donations on Givey
+    required_scope: donations:read
+    example_request: >-
+      $ curl https://api.givey.com/v4/donations \
+        -H "Authorization: Bearer {access token}"
+    example_response: >-
+      {
+        "data": [
+          {
+            "id": 1,
+            "type": "donations",
+            "attributes": {
+              "activity-id": "MK1234HFWEI",
+              "amount": 1000,
+              "comments-count": 12,
+              "content-text": "Well done",
+              "matched-total": 500,
+              "processed": true,
+              "status": "complete",
+              "created-at": "2018-07-17T09:26:52.688Z",
+              "is-anonymous": true,
+            }
+          }
+        ]
+      }
+  - create:
+    id: create
+    path: /donations
+    header: Create a donation
+    description: Creates a donation on Givey
+    required_scope: donations:create
+    example_request: >-
+      $ curl https://api.givey.com/v4/donations \
+        -H "Authorization: Bearer {access token}" \
+        -d donation[payment][amount]=2000 \
+        -d donation[charity][id]=1 \
+        -d donation[fundraiser][id]=2 \
+        -d donation[message]="Hello World" \
+        -d donation[anonymous]=false \
+        -d donation[name]=User \
+        -d donation[email]=user@example.com \
+        -d donation[giftaid][enabled]=true \
+        -d donation[giftaid][address][address1]="1 Givey Road" \
+        -d donation[giftaid][address][address2]="Givey" \
+        -d donation[giftaid][address][city]="Givey City" \
+        -d donation[giftaid][address][county]="Givey County" \
+        -d donation[giftaid][address][post_code]="GIV 3EY" \
+

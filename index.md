@@ -3,7 +3,6 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 title: Endpoints
-auto-header: none
-layout: home
+layout: default
 ---
 

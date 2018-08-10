@@ -1,9 +1,85 @@
 name: Fundraisers
+description: >-
+  A Fundraiser is an entity on Givey which is attached to a Charity or a Project.
+object_example: >-
+  {
+    "id": 1,
+    "type": "fundraisers",
+    "attributes": {
+      "givey-tag": "fundraiser-one",
+      "name": "Fundraiser one",
+      "description": "Description for Fundraiser one",
+      "avatars": {
+        "tiny": "url_to_avatar",
+        "small": "url_to_avatar",
+        "medium": "url_to_avatar",
+        "large": "url_to_avatar"
+      },
+      "hero-images": {
+        "small": "url_to_avatar",
+        "profile": "url_to_avatar",
+        "dark": "url_to_avatar"
+      },
+      "twitter-url": "https://twitter.com/fundraiserone",
+      "facebook-url": "https://facebook.com/fundraiser-one",
+      "profile-url": "https://givey.com/fundraiser-one",
+      "target": 10000,
+      "raised": 10000,
+      "percentage-raised": 100,
+      "created-at": "2018-07-17T09:26:52.688Z",
+      "ending-at": "2018-07-17T09:26:52.688Z"
+    }
+  }
+attributes:
+  - name: Id
+    type: string
+    description: The unique identifier of the Fundraiser
+  - name: givey-tag
+    type: string
+    description: The Givey Tag (username) of the Fundraiser
+  - name: name
+    type: string
+    description: The name of the Fundraiser
+  - name: description
+    type: string
+    description: The description of the Fundraiser
+  - name: avatars
+    type: object
+    description: An object of different avatar sizes along with their URLs
+  - name: hero-images
+    type: object
+    description: An object of different hero image sizes along with their URLs
+  - name: twitter-url
+    type: string
+    description: The Twitter URL of the Fundraiser
+  - name: facebook-url
+    type: string
+    description: The Facebook URL of the Fundraiser
+  - name: profile-url
+    type: string
+    description: The URL of the Fundraiser on Givey
+  - name: target
+    type: integer
+    description: The target amount the Fundraiser wishes to raise (in pence)
+  - name: raised
+    type: integer
+    description: The amount the Fundraiser has already raised (in pence)
+  - name: percentage-raised
+    type: integer
+    description: The percentage of funds raised compared to the target
+  - name: created-at
+    type: datetime
+    description: The date the Fundraiser was created
+  - name: ending-at
+    type: datetime
+    description: The date the Fundraiser will end (can be null)
 endpoints:
   - index:
+    id: index
     path: /fundraisers
     header: List all fundraisers
     description: Retrieves a list of all fundraisers on Givey
+    required_scope: fundraisers:read
     example_request: >-
       $ curl https://api.givey.com/v4/fundraisers \
         -H "Authorization: Bearer {access token}"
@@ -41,9 +117,11 @@ endpoints:
         ]
       }
   - show:
+    id: show
     path: /fundraisers/{id}
     header: List a specific fundraiser
     description: Retrieves a specific fundraiser based on passed arguments
+    required_scope: fundraisers:read
     example_request: >-
       $ curl https://api.givey.com/v4/fundraisers/1 \
         -H "Authorization: Bearer {access token}"

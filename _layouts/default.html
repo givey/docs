@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+{%- include header.html -%}
+<body data-spy="scroll" data-target="#navbar" data-offset="0">
+  {% include navbar.html %}
+  <div class="container-fluid">
+    <div>
+      <div class="row" id="intro">
+        <div class="col-md-5 descriptions">
+          <h3 style="margin-bottom: 4rem">Introduction</h3>
+          <p>
+            The Givey API conforms to the standards of <a href="http://jsonapi.org/" target="_blank">JSONAPI</a>. As such, URL structure and data is predictable.
+          </p>
+          <p>
+            We make use of HTTP Status codes in all responses so that you know if a request is successful or not.
+          </p>
+          <p>
+            For every response, including errors, we return JSON formatted responses.
+          </p>
+          <p>
+            The Givey API uses versioning with the most up to date version being V4. As a result, all requests to the api nmust include the version in the URL:
+            {% highlight shell %}$ curl https://api.givey.com/v4/{% endhighlight %}
+          </p>
+        </div>
+        <div class="col-md-7 examples">
+          <h5>API Endpoint</h5>
+          <pre>https://api.givey.com/v4/</pre>
+
+          <h5>Client Libraries</h5>
+          <p>
+            There are currently no client libraries for the Givey API.
+            If you are interested in one, or would like to create one, please contact <a href="mailto:support@givey.com">support@givey.com</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="row" id="auth">
+        <div class="col-md-5 descriptions">
+          <h3 style="margin-bottom: 4rem">Authentication</h3>
+          <p>
+            The Givey API uses access tokens for authentication. An access token is required for every request.
+            In order to generate an access token, please visit <a href="https://www.givey.com/developers" target="_blank">Givey Developers</a>.
+          </p>
+          <p>
+            Our access tokens utilize scopes. When generating an access token, you can request the scopes that you need (such as reading fundraiser data, or creating a donation).
+            These scopes make sure that users only request the data that they need.
+          </p>
+          <p>
+            The recommended way to authenticate your requests to the Givey API is through the request headers (bearer authentication).
+
+    {% highlight shell %}
+      $ curl https://api.givey.com/v4/charities \
+        -H "Authorization: Bearer ACCESS_TOKEN"{% endhighlight %}
+            Replace <code>ACCESS_TOKEN</code> with your actual access token.
+          </p>
+        </div>
+        <div class="col-md-7 examples">
+          <h5>Example request</h5>
+
+    {% highlight shell %}
+      $ curl https://api.givey.com/v4/charities \
+        -H "Authorization: Bearer ACCESS_TOKEN"{% endhighlight %}
+          <p>Replace <code>ACCESS_TOKEN</code> with your actual access token.</p>
+        </div>
+      </div>
+
+      {% for section_hash in site.data.api %}
+        {% assign section = section_hash[1] %}
+
+        <div class="row" id="object-{{ section.name }}">
+          <div class="col-md-5 descriptions">
+            <h3>{{ section.name }} object</h3>
+            <p>{{ section.description }}</p>
+
+            <div class="attribute-list">
+              <h5>Attributes</h5>
+              <hr />
+              <table>
+                {% for attr in section.attributes %}
+                  <tr>
+                    <td width="30%" class="text-right">
+                      <p>{{ attr.name }}</p>
+                      <code>{{ attr.type }}</code>
+                    </td>
+                    <td>
+                      {{ attr.description }}
+                    </td>
+                  </tr>
+                {% endfor %}
+              </table>
+            </div>
+
+            <hr />
+          </div>
+          <div class="col-md-7 examples">
+            <h5>Example response</h5>
+            {% highlight json %}{{ section.object_example }}{% endhighlight %}
+          </div>
+        </div>
+
+        {% for endpoint in section.endpoints %}
+          <div class="row" id="endpoint-{{ section.name }}-{{ endpoint.id }}">
+            <div class="col-md-5 descriptions">
+              <h3>{{ endpoint.header }}</h3>
+              <p class="endpoint-scope">
+                Required scope:
+                <code>{{ endpoint.required_scope }}</code>
+              </p>
+              <p class="endpoint-description">{{ endpoint.description }}</p>
+
+              <div class="argument-list">
+                <h5>Arguments</h5>
+                <hr />
+                {% if endpoint.args %}
+                  <table>
+                    {% for arg in endpoint.args %}
+                      <tr>
+                        <td width="30%" class="text-right">
+                          <p>{{ arg.name }}</p>
+                          <code>{{ arg.type }}</code>
+                        </td>
+                        <td>
+                          {{ arg.description }}
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  </table>
+                {% else %}
+                  No arguments
+                {% endif %}
+              </div>
+
+              <hr />
+            </div>
+
+            <div class="col-md-7 examples">
+              <h5>Example request</h5>
+              {% highlight shell %}{{ endpoint.example_request }}{% endhighlight %}
+
+              <h5>Example response</h5>
+              {% highlight json %}{{ endpoint.example_response }}{% endhighlight %}
+            </div>
+          </div>
+        {% endfor %}
+
+      {% endfor %}
+    </div>
+  {%- include footer.html -%}
+  </div>
+</body>

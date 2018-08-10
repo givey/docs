@@ -29,7 +29,6 @@ GEM
       safe_yaml (~> 1.0)
     jekyll-sass-converter (1.5.2)
       sass (~> 3.4)
-    jekyll-theme-prologue (0.3.2)
     jekyll-watch (2.0.0)
       listen (~> 3.0)
     kramdown (1.17.0)
@@ -59,8 +58,7 @@ PLATFORMS
 
 DEPENDENCIES
   jekyll (~> 3.8.3)
-  jekyll-theme-prologue
-  tzinfo-data
+  rouge
 
 BUNDLED WITH
    1.14.6

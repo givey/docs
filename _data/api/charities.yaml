@@ -1,9 +1,96 @@
 name: Charities
+description: >-
+  A Charity is an entity on Givey that can have many Fundraisers.
+  They can be donated to directly, or via one of it's fundraisers.
+  Projects on Givey are like Charities and the object is exactly the same.
+  A Project is a not-for-profit organisation which is not registered with the Charity Commission.
+object_example: >-
+  {
+    "id": 1,
+    "type": "charities",
+    "attributes": {
+      "givey-tag": "charity-one",
+      "name": "Charity one",
+      "description": "Description for Charity one",
+      "avatars": {
+        "tiny": "url_to_avatar",
+        "small": "url_to_avatar",
+        "medium": "url_to_avatar",
+        "large": "url_to_avatar"
+      },
+      "hero-images": {
+        "small": "url_to_avatar",
+        "profile": "url_to_avatar",
+        "dark": "url_to_avatar"
+      },
+      "website-url": "https://charityone.com",
+      "twitter-url": "https://twitter.com/fundraiserone",
+      "facebook-url": "https://facebook.com/fundraiser-one",
+      "profile-url": "https://givey.com/charity-one",
+      "donations-count": 123,
+      "following-count": 11,
+      "followers-count": 22,
+      "raised": 10000,
+      "billing-enabled?": true,
+      "created-at": "2018-07-17T09:26:52.688Z"
+    }
+  }
+attributes:
+  - name: Id
+    type: string
+    description: The unique identifier of the Charity
+  - name: givey-tag
+    type: string
+    description: The Givey Tag (username) of the Charity
+  - name: name
+    type: string
+    description: The name of the Charity
+  - name: description
+    type: string
+    description: The description of the Charity
+  - name: avatars
+    type: object
+    description: An object of different avatar sizes along with their URLs
+  - name: hero-images
+    type: object
+    description: An object of different hero image sizes along with their URLs
+  - name: website-url
+    type: string
+    description: The URL of the Charity's website
+  - name: twitter-url
+    type: string
+    description: The Twitter URL of the Charity
+  - name: facebook-url
+    type: string
+    description: The Facebook URL of the Charity
+  - name: profile-url
+    type: string
+    description: The URL of the Charity on Givey
+  - name: donations-count
+    type: integer
+    description: The amount of donations the Charity has
+  - name: following-count
+    type: integer
+    description: The amount of users this Charity is following
+  - name: followers-count
+    type: integer
+    description: The amount of users that follow this Charity
+  - name: raised
+    type: integer
+    description: The amount that this Charity has raised (in pence)
+  - name: billing-enabled?
+    type: boolean
+    description: Whether or not this Charity is enabled on Givey
+  - name: created-at
+    type: datetime
+    description: The date the Charity was created
 endpoints:
   - index:
+    id: index
     path: /charities
     header: List all charities
     description: Retrieves a list of all charities on Givey
+    required_scope: charities:read
     example_request: >-
       $ curl https://api.givey.com/v4/charities \
         -H "Authorization: Bearer {access token}"
@@ -28,12 +115,14 @@ endpoints:
                 "profile": "url_to_avatar",
                 "dark": "url_to_avatar"
               },
-              "website-url": "https://givey.com/charity-one",
+              "website-url": "https://www.charityone.com",
               "twitter-url": "https://twitter.com/charityone",
-              "donations-count": 542,
-              "following-count": 12,
-              "followers-count": 16,
-              "raised": 234300,
+              "facebook-url": "https://facebook.com/charity-one",
+              "profile-url": "https://givey.com/charity-one",
+              "donations-count": 123,
+              "following-count": 11,
+              "followers-count": 22,
+              "raised": 10000,
               "billing-enabled?": true,
               "created-at": "2018-07-17T09:26:52.688Z"
             }
@@ -41,9 +130,11 @@ endpoints:
         ]
       }
   - show:
+    id: show
     path: /charities/{id}
     header: List a specific charity
     description: Retrieves a specific charity based on passed arguments
+    required_scope: charities:read
     example_request: >-
       $ curl https://api.givey.com/v4/charities/1 \
         -H "Authorization: Bearer {access token}"
@@ -67,12 +158,14 @@ endpoints:
               "profile": "url_to_avatar",
               "dark": "url_to_avatar"
             },
-            "website-url": "https://givey.com/charity-one",
+            "website-url": "https://www.charityone.com",
             "twitter-url": "https://twitter.com/charityone",
-            "donations-count": 542,
-            "following-count": 12,
-            "followers-count": 16,
-            "raised": 234300,
+            "facebook-url": "https://facebook.com/charity-one",
+            "profile-url": "https://givey.com/charity-one",
+            "donations-count": 123,
+            "following-count": 11,
+            "followers-count": 22,
+            "raised": 10000,
             "billing-enabled?": true,
             "created-at": "2018-07-17T09:26:52.688Z"
           }
