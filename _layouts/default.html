@@ -18,7 +18,14 @@
           </p>
           <p>
             The Givey API uses versioning with the most up to date version being V4. As a result, all requests to the api nmust include the version in the URL:
-            {% highlight shell %}$ curl https://api.givey.com/v4/{% endhighlight %}
+            {% highlight shell %}  $ curl https://api.givey.com/v4/{% endhighlight %}
+          </p>
+          <p>
+            If you wish to test your requests, you can do so with the <code>staging</code> version of the API:
+{% highlight shell %}
+  $ curl https://api-staging.givey.com/v4 \
+    -H "Authorization: Bearer ACCESS_TOKEN"
+{% endhighlight %}
           </p>
         </div>
         <div class="col-md-7 examples">
