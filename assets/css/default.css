@@ -77,3 +77,9 @@ pre {
   line-height: 20px;
   margin-bottom: 2rem;
 }
+
+.badge {
+  font-size: 14px;
+  vertical-align: middle;
+  text-transform: uppercase;
+}

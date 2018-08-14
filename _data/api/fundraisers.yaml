@@ -160,3 +160,69 @@ endpoints:
       - name: Id
         description: The Id or username of the fundraiser
         type: string
+  - create:
+    id: create
+    method: post
+    path: /fundraisers
+    header: Create a fundraiser
+    description: Creates a fundraiser based on passed arguments
+    required_scope: fundraisers:create
+    example_request: >-
+      $ curl https://api.givey.com/v4/fundraisers \
+        -H "Authorization: Bearer {access token}" \
+        -d fundraisers[charity_id]=1 \
+        -d fundraisers[name]="Fundraiser one" \
+        -d fundraisers[description]="The description" \
+        -d fundraisers[target]=10000 \
+        -d fundraisers[offline_amount]=1000 \
+        -d fundraisers[ending_at]="2019-12-25"
+    example_response: >-
+      {
+        "data": {
+          "id": 1,
+          "type": "fundraisers",
+          "attributes": {
+            "givey-tag": "fundraiser-one",
+            "name": "Fundraiser one",
+            "description": "Description for Fundraiser one",
+            "avatars": {
+              "tiny": "url_to_avatar",
+              "small": "url_to_avatar",
+              "medium": "url_to_avatar",
+              "large": "url_to_avatar"
+            },
+            "hero-images": {
+              "small": "url_to_avatar",
+              "profile": "url_to_avatar",
+              "dark": "url_to_avatar"
+            },
+            "twitter-url": "https://twitter.com/fundraiserone",
+            "facebook-url": "https://facebook.com/fundraiser-one",
+            "profile-url": "https://givey.com/fundraiser-one",
+            "target": 10000,
+            "raised": 10000,
+            "percentage-raised": 100,
+            "created-at": "2018-07-17T09:26:52.688Z",
+            "ending-at": "2018-07-17T09:26:52.688Z"
+          }
+        }
+      }
+    args:
+      - name: charity_id
+        description: The Id or username of the Charity this fundraiser is for
+        type: string
+      - name: name
+        description: The name of the fundraiser
+        type: string
+      - name: description
+        description: The description of the fundraiser
+        type: string
+      - name: target
+        description: The target to be raised for the fundraiser (in pence)
+        type: integer
+      - name: offline_amount
+        description: The amount already raised from donations (in pence)
+        type: integer
+      - name: ending_at
+        description: The date that this fundraiser will end
+        type: datetime

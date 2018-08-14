@@ -1,0 +1,210 @@
+name: Users
+object_example: >-
+  {
+    "id": "1",
+    "type": "users",
+    "attributes": {
+    "givey-tag": "user-one",
+    "name": "User one",
+    "first-name": "User",
+    "last-name": "one",
+    "avatars": {
+      "tiny": "url_to_avatar",
+      "small": "url_to_avatar",
+      "medium": "url_to_avatar",
+      "large": "url_to_avatar"
+    },
+    "hero-images": {
+      "small": "url_to_avatar",
+      "profile": "url_to_avatar",
+      "dark": "url_to_avatar"
+    },
+    "donations-count": 55,
+    "followers-count": 21,
+    "following-count": 14,
+    "matching": {
+      "enabled": true,
+      "percent": 50
+    },
+    "created-at": "2018-08-14T08:41:28.801Z"
+  }
+attributes:
+  - name: Id
+    type: string
+    description: The unique identifier of the user
+  - name: givey-tag
+    type: string
+    description: The Givey Tag (username) of the user
+  - name: name
+    type: string
+    description: The name of the user
+  - name: first_name
+    type: string
+    description: The first name of the user
+  - name: last_name
+    type: string
+    description: The last name of the user
+  - name: avatars
+    type: object
+    description: An object of different avatar sizes along with their URLs
+  - name: hero-images
+    type: object
+    description: An object of different hero image sizes along with their URLs
+  - name: donations-count
+    description: The amount of donations this user has made
+    type: integer
+  - name: following-count
+    type: integer
+    description: The amount of users this user is following
+  - name: followers-count
+    type: integer
+    description: The amount of users that follow this user
+  - name: created-at
+    type: datetime
+    description: The date the Fundraiser was created
+endpoints:
+  - index:
+    id: index
+    path: /users
+    header: List all users
+    description: Retrieves a list of all users on Givey
+    required_scope: users:read
+    example_request: >-
+      $ curl https://api.givey.com/v4/users \
+        -H "Authorization: Bearer {access token}"
+    example_response: >-
+      {
+        "data": [
+          {
+            "id": "1",
+            "type": "users",
+            "attributes": {
+            "givey-tag": "user-one",
+            "name": "User one",
+            "first-name": "User",
+            "last-name": "one",
+            "avatars": {
+              "tiny": "url_to_avatar",
+              "small": "url_to_avatar",
+              "medium": "url_to_avatar",
+              "large": "url_to_avatar"
+            },
+            "hero-images": {
+              "small": "url_to_avatar",
+              "profile": "url_to_avatar",
+              "dark": "url_to_avatar"
+            },
+            "donations-count": 55,
+            "followers-count": 21,
+            "following-count": 14,
+            "matching": {
+              "enabled": true,
+              "percent": 50
+            },
+            "created-at": "2018-08-14T08:41:28.801Z"
+          }
+        ]
+      }
+  - show:
+    id: show
+    path: /users/{id}
+    header: List a specific user
+    description: Retrieves a specific user
+    required_scope: users:read
+    example_request: >-
+      $ curl https://api.givey.com/v4/users/1 \
+        -H "Authorization: Bearer {access token}"
+    example_response: >-
+      {
+        "data": {
+          "id": "1",
+          "type": "users",
+          "attributes": {
+          "givey-tag": "user-one",
+          "name": "User one",
+          "first-name": "User",
+          "last-name": "one",
+          "avatars": {
+            "tiny": "url_to_avatar",
+            "small": "url_to_avatar",
+            "medium": "url_to_avatar",
+            "large": "url_to_avatar"
+          },
+          "hero-images": {
+            "small": "url_to_avatar",
+            "profile": "url_to_avatar",
+            "dark": "url_to_avatar"
+          },
+          "donations-count": 55,
+          "followers-count": 21,
+          "following-count": 14,
+          "matching": {
+            "enabled": true,
+            "percent": 50
+          },
+          "created-at": "2018-08-14T08:41:28.801Z"
+        }
+      }
+    args:
+      - name: Id
+        description: The Id or username of the user
+        type: string
+  - create:
+    id: create
+    method: post
+    path: /users
+    header: Create a user
+    description: Creates a user based on passed arguments
+    required_scope: users:create
+    example_request: >-
+      $ curl https://api.givey.com/v4/users \
+        -H "Authorization: Bearer {access token}" \
+        -d users[first_name]="User" \
+        -d users[last_name]="one" \
+        -d users[email]="userone@example.com" \
+        -d users[password]="$ABC123!"
+    example_response: >-
+      {
+        "data": {
+          "id": "1",
+          "type": "users",
+          "attributes": {
+          "givey-tag": "user-one",
+          "name": "User one",
+          "first-name": "User",
+          "last-name": "one",
+          "avatars": {
+            "tiny": "url_to_avatar",
+            "small": "url_to_avatar",
+            "medium": "url_to_avatar",
+            "large": "url_to_avatar"
+          },
+          "hero-images": {
+            "small": "url_to_avatar",
+            "profile": "url_to_avatar",
+            "dark": "url_to_avatar"
+          },
+          "donations-count": 55,
+          "followers-count": 21,
+          "following-count": 14,
+          "matching": {
+            "enabled": true,
+            "percent": 50
+          },
+          "created-at": "2018-08-14T08:41:28.801Z"
+        }
+      }
+    args:
+      - name: first_name
+        type: string
+        description: The first name of the user
+      - name: last_name
+        type: string
+        description: The last name of the user
+      - name: email
+        type: string
+        description: The email address of the user
+      - name: password
+        type: string
+        description: The password of the user
+

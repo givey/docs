@@ -76,26 +76,30 @@ endpoints:
           }
         ]
       }
-  - create:
-    id: create
-    path: /donations
-    header: Create a donation
-    description: Creates a donation on Givey
-    required_scope: donations:create
+  - show:
+    id: show
+    path: /donations/{id}
+    header: List a specific donation
+    description: Retrieves a specific donation based on passed arguments
+    required_scope: donations:read
     example_request: >-
-      $ curl https://api.givey.com/v4/donations \
-        -H "Authorization: Bearer {access token}" \
-        -d donation[payment][amount]=2000 \
-        -d donation[charity][id]=1 \
-        -d donation[fundraiser][id]=2 \
-        -d donation[message]="Hello World" \
-        -d donation[anonymous]=false \
-        -d donation[name]=User \
-        -d donation[email]=user@example.com \
-        -d donation[giftaid][enabled]=true \
-        -d donation[giftaid][address][address1]="1 Givey Road" \
-        -d donation[giftaid][address][address2]="Givey" \
-        -d donation[giftaid][address][city]="Givey City" \
-        -d donation[giftaid][address][county]="Givey County" \
-        -d donation[giftaid][address][post_code]="GIV 3EY" \
-
+      $ curl https://api.givey.com/v4/donations/123 \
+        -H "Authorization: Bearer {access token}"
+    example_response: >-
+      {
+        "data": {
+          "id": 123,
+          "type": "donations",
+          "attributes": {
+            "activity-id": "MK1234HFWEI",
+            "amount": 1000,
+            "comments-count": 12,
+            "content-text": "Well done",
+            "matched-total": 500,
+            "processed": true,
+            "status": "complete",
+            "created-at": "2018-07-17T09:26:52.688Z",
+            "is-anonymous": true,
+          }
+        }
+      }
