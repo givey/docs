@@ -63,6 +63,48 @@
         </div>
       </div>
 
+      <div class="row" id="pagination">
+        <div class="col-md-5 descriptions">
+          <h3 style="margin-bottom: 4rem">Pagination and ordering</h3>
+          <p>
+            The Givey API uses request arguments to paginate result sets.
+          </p>
+          <p>
+            If no arguments are passed for pagination, the first page of results will be returned with a default limit set (varies per result set).
+          </p>
+          <p>
+            All returned result sets include a <code>links</code> object. This object contains links to the next sets in the data.
+          </p>
+          <p>To order a result set you can use <code>order[attribute]</code> and <code>order[direction]</code>.
+        </div>
+        <div class="col-md-7 examples">
+          <h5>Example request</h5>
+{% highlight shell %}
+$ curl https://api.givey.com/v4/users \
+  -H "Authorization: Bearer {access token}" \
+  -d page[size]=1 \
+  -d page[number]=1 \
+  -d order[attribute]="id" \
+  -d order[direction]="asc"{% endhighlight %}
+
+          <h5>Example response</h5>
+{% highlight json %}
+  {
+    "data": [
+      {}
+    ],
+    "links": {
+      "self": "https://api.givey.com/v4/users?access_token=access_token&page%5Bnumber%5D=1&page%5Bsize%5D=1",
+      "first": "https://api.givey.com/v4/users?access_token=access_token&page%5Bnumber%5D=1&page%5Bsize%5D=1",
+      "prev": null,
+      "next": "https://api.givey.com/v4/users?access_token=access_token&page%5Bnumber%5D=2&page%5Bsize%5D=1",
+      "last": "https://api.givey.com/v4/users?access_token=access_token&page%5Bnumber%5D=45798&page%5Bsize%5D=1"
+    }
+  }
+{% endhighlight %}
+        </div>
+      </div>
+
       {% for section_hash in site.data.api %}
         {% assign section = section_hash[1] %}
 
@@ -100,7 +142,16 @@
         {% for endpoint in section.endpoints %}
           <div class="row" id="endpoint-{{ section.name }}-{{ endpoint.id }}">
             <div class="col-md-5 descriptions">
-              <h3>{{ endpoint.header }}</h3>
+              <h3>
+                <label class="badge badge-secondary">
+                  {% if endpoint.method %}
+                    {{ endpoint.method }}
+                  {% else %}
+                    GET
+                  {% endif %}
+                </label>
+                {{ endpoint.header }}
+              </h3>
               <p class="endpoint-scope">
                 Required scope:
                 <code>{{ endpoint.required_scope }}</code>
