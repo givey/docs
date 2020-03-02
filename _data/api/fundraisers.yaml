@@ -119,7 +119,7 @@ endpoints:
   - show:
     id: show
     path: /fundraisers/{id}
-    header: List a specific fundraiser
+    header: List all fundraisers for a specific charity
     description: Retrieves a specific fundraiser based on passed arguments
     required_scope: fundraisers:read
     example_request: >-
@@ -189,7 +189,7 @@ endpoints:
   - show:
     id: show
     path: /fundraisers/?charity_id={id}
-    header: List all fundraisers for a specific charity
+    header: List a specific fundraiser 
     description: Retrieves a list of fundraisers based on passed arguments
     required_scope: fundraisers:read
     example_request: >-
@@ -229,9 +229,6 @@ endpoints:
     args:
       - name: Id
         description: The Id or username of the fundraiser
-        type: string
-      - name: charity_id
-        description: The Id or username of the charity the fundraiser is linked to
         type: string
   - create:
     id: create
