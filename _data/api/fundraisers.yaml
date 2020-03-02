@@ -123,6 +123,76 @@ endpoints:
     description: Retrieves a specific fundraiser based on passed arguments
     required_scope: fundraisers:read
     example_request: >-
+      $ curl https://api.givey.com/v4/fundraisers?charity_id=20
+        -H "Authorization: Bearer {access token}"
+    example_response: >-
+      {
+        "data": [
+            {
+                "id": "1",
+                "type": "fundraisers",
+                "attributes": {
+                    "givey-tag": "fundraiser1",
+                    "name": "Fundraiser 1",
+                    "description": "<p>Thank you for visiting our Givey page.</p><p>When you make your donation through Givey, the charity receives 100% of the donation.</p>",
+                    "avatars": {
+                        "tiny": "url_to_avatar",
+                        "small": "url_to_avatar",
+                        "medium": "url_to_avatar",
+                        "large": "url_to_avatar"
+                    },
+                    "hero-images": {
+                        "small": "url_to_avatar",
+                        "profile": "url_to_avatar",
+                        "dark": "url_to_avatar"
+                    },
+                    "twitter-url": "https://twitter.com/",
+                    "facebook-url": "https://www.facebook.com/",
+                    "profile-url": "https://www.givey.test/fundraiser1",
+                    "target": 100000,
+                    "raised": 0.0,
+                    "donations-count": 0,
+                    "percentage-raised": 0,
+                    "created-at": "2020-02-29T10:36:12.713Z",
+                    "ending-at": null
+                },
+                "relationships": {
+                    "charity": {
+                        "data": {
+                            "id": "20",
+                            "type": "charities"
+                        }
+                    },
+                    "owner": {
+                        "data": {
+                            "id": "11314",
+                            "type": "users"
+                        }
+                    },
+                    "admins": {
+                        "data": [
+                            {
+                                "id": "11314",
+                                "type": "users"
+                            }
+                        ]
+                    }
+                }
+            }
+        ],
+      }
+    args:
+      - name: charity_id
+        description: The Id or username of the charity the fundraiser is linked to
+        type: string
+
+  - show:
+    id: show
+    path: /fundraisers/?charity_id={id}
+    header: List all fundraisers for a specific charity
+    description: Retrieves a list of fundraisers based on passed arguments
+    required_scope: fundraisers:read
+    example_request: >-
       $ curl https://api.givey.com/v4/fundraisers/1 \
         -H "Authorization: Bearer {access token}"
     example_response: >-
@@ -159,6 +229,9 @@ endpoints:
     args:
       - name: Id
         description: The Id or username of the fundraiser
+        type: string
+      - name: charity_id
+        description: The Id or username of the charity the fundraiser is linked to
         type: string
   - create:
     id: create
